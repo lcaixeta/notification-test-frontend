@@ -19,23 +19,30 @@ Follow the steps below to install and run the application locally.
 
 ### 1. Clone the Repository
 
-
+```bash
 git clone https://github.com/your-username/notification-test-frontend.git
 cd notification-test-frontend
+```
 
 ### 2. Install Dependencies
 
+```bash
 npm install
+```
 
-### 3.  Run the Application
+### 3. Run the Application
 
+```bash
 npm start
+```
 
-The application will be available at:
-http://localhost:3000
+The application will be available at: [http://localhost:3000](http://localhost:3000)
+
+---
 
 ## Project Structure
 
+```
 notification-test-frontend/
 ├── public/
 ├── src/
@@ -45,3 +52,4 @@ notification-test-frontend/
 │   └── App.js
 ├── package.json
 └── README.md
+```
