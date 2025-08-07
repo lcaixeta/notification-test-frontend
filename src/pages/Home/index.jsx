@@ -18,14 +18,43 @@ function Home() {
       console.error("Error while getting logs:", err);
     }
   }
-  
+
   async function getCategories() {
     try {
       const response = await api.get("/category");
       setCategory(response.data);
     } catch (err) {
+      console.error("Error while sending notification:", err);
+    }
+  }
+
+  async function sendNotification() {
+    try {
+      await api
+        .post("/notification/create", {
+          categoryId: selectedCategory.id,
+          message: message,
+        })
+        await getLogHistory();
+        setSelectedCategory(null);
+        setMessage("")
+    } catch (err) {
       console.error("Error while getting categories:", err);
     }
+  }
+
+  function validateNotification() {
+    if (!selectedCategory) {
+      alert("Please, select a category.");
+      return;
+    }
+
+    if (!message.trim()) {
+      alert("Please, write a message.");
+      return;
+    }
+
+    sendNotification();
   }
 
   useEffect(() => {
@@ -59,27 +88,7 @@ function Home() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button
-          type="button"
-          onClick={() => {
-            if (!selectedCategory) {
-              alert("Please, select a category.");
-              return;
-            }
-
-            if (!message.trim()) {
-              alert("Please, write a message.");
-              return;
-            }
-        
-            const body = {
-              categoryId: selectedCategory.id,
-              message: message.trim(),
-            };
-
-            console.log("Enviando para o servidor:", body);
-          }}
-        >
+        <button type="button" onClick={validateNotification}>
           Send
         </button>
       </form>
